@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+<style>
+
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:Arial, sans-serif;
+    }
+
+    body{
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+
+        background-image:url('https://images.unsplash.com/photo-1469474968028-56623f02e42e');
+        background-size:cover;
+        background-position:center;
+        background-repeat:no-repeat;
+    }
+
+    .login-card{
+        width:520px;
+        padding:40px;
+
+        background:rgba(255,255,255,0.18);
+        backdrop-filter:blur(12px);
+        -webkit-backdrop-filter:blur(12px);
+
+        border-radius:20px;
+        border:1px solid rgba(255,255,255,0.3);
+
+        box-shadow:0 8px 32px rgba(0,0,0,0.25);
+    }
+
+    .login-title{
+        text-align:center;
+        color:white;
+        margin-bottom:10px;
+        font-size:36px;
+    }
+
+    .quote{
+        text-align:center;
+        color:white;
+        margin-bottom:25px;
+        font-style:italic;
+    }
+
+    table{
+        width:100%;
+    }
+
+    th{
+        text-align:left;
+        padding:10px;
+        color:white;
+        width:120px;
+    }
+
+    td{
+        padding:10px;
+    }
+
+    input[type=text],
+    input[type=password]{
+        width:100%;
+        padding:12px;
+        border:none;
+        border-radius:10px;
+        outline:none;
+        font-size:15px;
+    }
+
+    input[type=text]:focus,
+    input[type=password]:focus{
+        box-shadow:0 0 10px rgba(255,255,255,0.7);
+    }
+
+    .signin-btn{
+        background:#28a745;
+        color:white;
+        border:none;
+        padding:12px 25px;
+        border-radius:30px;
+        cursor:pointer;
+        font-size:15px;
+        font-weight:bold;
+    }
+
+    .signin-btn:hover{
+        transform:scale(1.05);
+        transition:.3s;
+    }
+
+    .signup-btn{
+        display:inline-block;
+        background:#007bff;
+        color:white;
+        padding:12px 25px;
+        border-radius:30px;
+        text-decoration:none;
+        margin-left:10px;
+        font-weight:bold;
+    }
+
+    .signup-btn:hover{
+        background:#0056b3;
+        color:white;
+    }
+
+    .forgot-link{
+        color:white;
+        text-decoration:none;
+        font-weight:bold;
+    }
+
+    .forgot-link:hover{
+        text-decoration:underline;
+    }
+
+    .error{
+        color:#ffd6d6;
+        font-size:14px;
+    }
+
+    .msg-success{
+        color:#c8ffd2;
+        text-align:center;
+        margin-bottom:15px;
+    }
+
+    .msg-error{
+        color:#ffb3b3;
+        text-align:center;
+        margin-bottom:15px;
+    }
+
+</style>
+
+
+</head>
+<body>
+
+<form method="POST">
+    {% csrf_token %}
+
+
+<div class="login-card">
+
+    <h1 class="login-title">Login</h1>
+
+    <div class="quote">
+        "The future depends on what you do today."
+    </div>
+
+    {{message}}
+
+    {% if form.error %}
+    <h3 class="msg-error">
+        {{ form.message }}
+    </h3>
+    {% else %}
+    <h3 class="msg-success">
+        {{ form.message }}
+    </h3>
+    {% endif %}
+
+    <table>
+
+        <tr>
+            <th>Login ID</th>
+            <td>
+                <input type="text" name="loginId" placeholder="Enter Login ID">
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2" class="error">
+                {{ form.inputError.loginId }}
+            </td>
+        </tr>
+
+        <tr>
+            <th>Password</th>
+            <td>
+                <input type="password" name="password" placeholder="Enter Password">
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2" class="error">
+                {{ form.inputError.password }}
+            </td>
+        </tr>
+
+        <tr>
+            <th></th>
+            <td>
+                <input type="submit" value="Sign In" class="signin-btn">
+
+                <a href="/Registration/" class="signup-btn">
+                    Sign Up
+                </a>
+            </td>
+        </tr>
+
+        <tr>
+            <th></th>
+            <td>
+                <a href="/ORS/ForgetPassword/" class="forgot-link">
+                    Forgot my password?
+                </a>
+            </td>
+        </tr>
+
+    </table>
+
+</div>
+
+</form>
+
+</body>
+</html>
+

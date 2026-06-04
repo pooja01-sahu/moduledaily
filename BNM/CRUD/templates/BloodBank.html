@@ -1,0 +1,30 @@
+{% include "Header.html" %}
+<div align="center">
+    <h3>Blood Bank Form</h3>
+
+    <form method="POST">
+        <input type="hidden" name="id" value="{{ form.id }}">
+
+        Blood Group:
+        <input type="text" name="bloodGroup" value="{{ form.bloodGroup }}">
+        <span style="color:red">{{ form.inputError.bloodGroup }}</span>
+        <br><br>
+
+        UnitsAvailable:
+        <input type="number" name="unitsAvailable" value="{{ form.unitsAvailable }}">
+        <span style="color:red">{{ form.inputError.unitsAvailable }}</span>
+        <br><br>
+
+        Location:
+        <input type="text" name="location" value="{{ form.location }}">
+        <span style="color:red">{{ form.inputError.location }}</span>
+        <br><br>
+
+
+        <input type="submit" value="Save">
+    </form>
+
+    {{ form.message }}
+</div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+{% include "Header.html" %}
+<div align="center">
+    <h3>Bank Note Form</h3>
+
+    <form method="POST">
+        <input type="hidden" name="id" value="{{ form.id }}">
+
+         Bank Name:
+        <input type="text" name="rateLimitCode" value="{{ form.rateLimitCode }}">
+        <span style="color:red">{{ form.inputError.rateLimitCode }}</span>
+        <br><br>
+
+        Principal:
+        <input type="text" name="apiName" value="{{ form.apiName }}">
+        <span style="color:red">{{ form.inputError.apiName }}</span>
+        <br><br>
+
+        Interest Rate:
+        <input type="text" name="limitPerMinute" value="{{ form.limitPerMinute }}">
+        <span style="color:red">{{ form.inputError.limitPerMinute }}</span>
+        <br><br>
+
+        Due Date:
+        <input type="date" name="status" value="{{ form.status}}">
+        <span style="color:red">{{ form.inputError.status }}</span>
+        <br><br>
+
+        <input type="submit" value="Save">
+    </form>
+
+    {{ form.message }}
+</div>
+</body>
+</html>

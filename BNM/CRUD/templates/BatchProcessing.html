@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% include "Header.html" %}
+<from method="POST">
+    {% csrf_token %}
+    <div align="center">
+        <h1>Btach Processing Module</h1>
+        {% if form.error %}
+        <h3><font color="red">{{form.message}}</font></h3>
+        {% else %}
+        <h3><font color="green">{{form.message}}</font></h3>
+        {% endif %}
+        <table>
+            <input type="hidden" name="id" value="{{form.id}}">
+            <tr>
+                <th>BatchCode:</th>
+                <td><input type="text" name="batchCode" value="{{form.batchCode}}"></td>
+                <td  style="position:fixed; color:red;">{{form.inputError.batchCode}}</td>
+            </tr>
+
+            <tr>
+                <th>BatchName:</th>
+                <td><input type="text" name="batchName" value="{{form.batchName}}"></td>
+                <td  style="position:fixed; color:red;">{{form.inputError.batchName}}</td>
+            </tr>
+
+            <tr>
+                <th>TotalRecords:</th>
+                <td><input type="number" name="totalRecords" value="{{form.totalRecords}}"></td>
+                <td style="position:fixed; color:red;">{{form.inputError.totalRecords}}</td>
+            </tr>
+            <tr>
+                <th>Status:</th>
+                <td><input type="number" name="status" value="{{form.status}}"></td>
+                <td style="position:fixed; color:red;">{{form.inputError.status}}</td>
+            </tr>
+
+            <tr>
+                <th></th>
+                <td><input type="submit" value="save"></td>
+            </tr>
+        </table>
+    </div>
+</from>
+</body>
+</html>

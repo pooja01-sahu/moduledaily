@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% include "Header.html" %}
+    <form method="POST">
+        {% csrf_token %}
+        <div align="center">
+            <h1>Branch manager</h1>
+            {% if form.error %}
+                <h3><font color="red"> {{ form.message }} </font></h3>
+            {% else %}
+                <h3><font color="green"> {{ form.message }} </font></h3>
+            {% endif %}
+
+            <table>
+                <input type="hidden" name="id" value="{{form.id}}">
+
+                <tr>
+                    <th>Manager Name:</th>
+                    <td><input type="text" name="managerName" value="{{form.managerName}}"></td>
+                    <td style="position: fixed; color: red;">{{ form.inputError.managerName }}</td>
+                </tr>
+
+                <tr>
+                    <th>Branch name:</th>
+                    <td><input type="text" name="branchName" value="{{form.branchName}}"></td>
+                    <td style="position: fixed; color: red;">{{ form.inputError.branchName }}</td>
+                </tr>
+
+                 <tr>
+                    <th>Contact Number:</th>
+                    <td><input type="text" name="contactNumber" value="{{form.contactNumber}}"></td>
+                    <td style="position: fixed; color: red;">{{ form.inputError.contactNumber }}</td>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <td><input type="submit" value="save"></td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</body>
+</html>

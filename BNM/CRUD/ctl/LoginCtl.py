@@ -1,0 +1,55 @@
+
+from django.shortcuts import render, redirect
+
+from .BaseCtl import Basectl
+from ..utility.DataValidator import DataValidator
+from ..service.UserService import UserService
+
+
+class LoginCtl(Basectl):
+
+    def request_to_form(self, requestFrom):
+        self.form["loginId"] = requestFrom["loginId"]
+        self.form["password"] = requestFrom["password"]
+        self.form["rememberMe"] = requestFrom.get("rememberMe", False)
+
+    def input_validation(self):
+        super().input_validation()
+        inputError = self.form["inputError"]
+        if (DataValidator.isNull(self.form["loginId"])):
+            inputError["loginId"] = "Login can not be null"
+            self.form["error"] = True
+        if (DataValidator.isNull(self.form["password"])):
+            inputError["password"] = "Password can not be null"
+            self.form["error"] = True
+
+        return self.form["error"]
+
+    def display(self, request, params={}):
+        # if request.session.get("loginId"):
+        #     return redirect('/ORS/Welcome')
+        return render(request, self.get_template(), {"form": self.form})
+
+    def submit(self, request, params={}):
+        user = self.get_service().authenticate(self.form)
+        if (user is None):
+            self.form["error"] = True
+            self.form["message"] = "Invalid Login or Password"
+            res = render(request, self.get_template(), {"form": self.form})
+        else:
+            request.session.set_expiry(0)  # expires when browser closes
+            request.session["userId"] = user.id
+            request.session["loginId"] = user.loginId
+            request.session["firstName"] = user.firstName
+            request.session["lastName"] = user.lastName
+            res = redirect('/Welcome/')
+        return res
+
+    # Template html of Role page    
+    def get_template(self):
+        return "Login.html"
+
+        # Service of Role
+
+    def get_service(self):
+        return UserService()
